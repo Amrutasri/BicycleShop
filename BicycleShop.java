@@ -1,11 +1,15 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BicycleShop {
 
-    List<Bicycle> totalBicycles;
-    List<Bicycle> availableBicycles;
-    List<Bicycle> hiredBicycles = new ArrayList<>();
+    private List<Bicycle> totalBicycles;
+    private List<Bicycle> availableBicycles;
+    private List<Bicycle> hiredBicycles = new ArrayList<>();
+    private Date bicycleHiringTime;
+    private Date bicycleReturnTime;
+
     private OutputDriver outputDriver;
     private InputDriver inputDriver;
     private Customer customer;
@@ -28,7 +32,7 @@ public class BicycleShop {
 
                 case 1 :    for(Bicycle bicycle : totalBicycles) {
                                 outputDriver.print(bicycle.getName());
-                                outputDriver.print(bicycle.getRentPerMinute());
+                                outputDriver.print(bicycle.getRentPerSecond());
                                 outputDriver.print(bicycle.getStatus());
                             }
                             break;
@@ -39,6 +43,7 @@ public class BicycleShop {
                             if(!hireSuccess) {
                                 outputDriver.print(displayMessage.hireBicycleUnSuccess);
                             } else {
+                                bicycleHiringTime = new Date();
                                 outputDriver.print(displayMessage.hireBicycleSuccess);
                             }
                             break;
@@ -49,7 +54,13 @@ public class BicycleShop {
                             if(!returnSuccess) {
                                 outputDriver.print(displayMessage.returnBicycleUnSuccess);
                             } else {
+                                bicycleReturnTime = new Date();
                                 outputDriver.print(displayMessage.returnBicycleSuccess);
+                                outputDriver.print(displayMessage.inVoice);
+                                int choice = inputDriver.inputAsInt();
+                                if(choice==1) {
+                                    customer.seeInVoice(bicycleHiringTime,bicycleReturnTime);
+                                }
                             }
                             break;
             }
