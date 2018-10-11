@@ -34,6 +34,7 @@ public class BicycleShop {
                                 outputDriver.print(bicycle.getName());
                                 outputDriver.print(bicycle.getRentPerSecond());
                                 outputDriver.print(bicycle.getStatus());
+                                outputDriver.print("\n");
                             }
                             break;
 
@@ -43,7 +44,6 @@ public class BicycleShop {
                             if(!hireSuccess) {
                                 outputDriver.print(displayMessage.hireBicycleUnSuccess);
                             } else {
-                                bicycleHiringTime = new Date();
                                 outputDriver.print(displayMessage.hireBicycleSuccess);
                             }
                             break;
@@ -54,12 +54,11 @@ public class BicycleShop {
                             if(!returnSuccess) {
                                 outputDriver.print(displayMessage.returnBicycleUnSuccess);
                             } else {
-                                bicycleReturnTime = new Date();
                                 outputDriver.print(displayMessage.returnBicycleSuccess);
                                 outputDriver.print(displayMessage.inVoice);
                                 int choice = inputDriver.inputAsInt();
                                 if(choice==1) {
-                                    customer.seeInVoice(bicycleHiringTime,bicycleReturnTime);
+                                    customer.seeInVoice();
                                 }
                             }
                             break;
@@ -73,7 +72,8 @@ public class BicycleShop {
                 bicycle.setStatus(false);
                 hiredBicycles.add(bicycle);
                 availableBicycles.remove(bicycle);
-                customer.addHiredBicycles(bicycle);
+                bicycleHiringTime = new Date();
+                customer.addHiredBicycles(bicycle,bicycleHiringTime);
                 return true;
             }
         }
@@ -86,7 +86,8 @@ public class BicycleShop {
                 bicycle.setStatus(true);
                 availableBicycles.add(bicycle);
                 hiredBicycles.remove(bicycle);
-                customer.removeReturnedBicycles(bicycle);
+                bicycleReturnTime = new Date();
+                customer.removeReturnedBicycles(bicycle,bicycleReturnTime);
                 return true;
             }
         }
