@@ -1,6 +1,5 @@
-package model;
-
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Customer {
@@ -20,5 +19,10 @@ public class Customer {
     public void removeReturnedBicycles(Bicycle bicycle) {
         hiredButNotReturned.remove(bicycle);
         hiredAndReturned.add(bicycle);
+    }
+
+    public void seeInVoice(Date bicycleHiringTime, Date bicycleReturnTime) {
+        InVoice inVoice = new InVoice(name,hiredAndReturned,bicycleHiringTime,bicycleReturnTime);
+        inVoice.generate();
     }
 }
