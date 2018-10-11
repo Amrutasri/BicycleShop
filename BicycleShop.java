@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,8 +8,8 @@ public class BicycleShop {
     private List<Bicycle> totalBicycles;
     private List<Bicycle> availableBicycles;
     private List<Bicycle> hiredBicycles = new ArrayList<>();
-    private Date bicycleHiringTime;
-    private Date bicycleReturnTime;
+    private LocalDateTime bicycleHiringTime;
+    private LocalDateTime bicycleReturnTime;
 
     private OutputDriver outputDriver;
     private InputDriver inputDriver;
@@ -34,7 +35,7 @@ public class BicycleShop {
                                 outputDriver.print(bicycle.getName());
                                 outputDriver.print(bicycle.getRentPerSecond());
                                 outputDriver.print(bicycle.getStatus());
-                                outputDriver.print("\n");
+                                System.out.println();
                             }
                             break;
 
@@ -72,7 +73,7 @@ public class BicycleShop {
                 bicycle.setStatus(false);
                 hiredBicycles.add(bicycle);
                 availableBicycles.remove(bicycle);
-                bicycleHiringTime = new Date();
+                bicycleHiringTime = LocalDateTime.now();
                 customer.addHiredBicycles(bicycle,bicycleHiringTime);
                 return true;
             }
@@ -86,7 +87,7 @@ public class BicycleShop {
                 bicycle.setStatus(true);
                 availableBicycles.add(bicycle);
                 hiredBicycles.remove(bicycle);
-                bicycleReturnTime = new Date();
+                bicycleReturnTime = LocalDateTime.now();
                 customer.removeReturnedBicycles(bicycle,bicycleReturnTime);
                 return true;
             }
