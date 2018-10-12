@@ -3,17 +3,12 @@ import java.util.List;
 
 public class Owner {
 
-    private List<Customer> customerList = new ArrayList<>();
+    OutputDriver outputDriver = new OutputDriver();
+    InputDriver inputDriver = new InputDriver();
+    DisplayMessage displayMessage = new DisplayMessage();
 
-    void addCustomer(Customer customer) {
-        customerList.add(customer);
-    }
-
-    void checkInVoiceOfCustomer(String customerName) {
-        for(Customer customer : customerList) {
-            if(customer.getName().equals(customerName)) {
-                customer.seeInVoice();
-            }
-        }
+    boolean grantPermission(String customerId) {
+        outputDriver.print(displayMessage.grantPermission);
+        return inputDriver.inputAsBoolean();
     }
 }

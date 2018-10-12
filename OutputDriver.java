@@ -1,5 +1,3 @@
-package view;
-
 public class OutputDriver {
 
     private Object object;
